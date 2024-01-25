@@ -57,7 +57,7 @@ class ResultScreen extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: circleColor,
               ),
-              padding: EdgeInsets.all(100.0),
+              padding: EdgeInsets.all(80.0),
               child: Text(
                 '$differenceText秒',
                 style: TextStyle(
