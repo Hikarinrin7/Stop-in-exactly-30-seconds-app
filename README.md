@@ -25,7 +25,7 @@ resetすると何度でも遊べます。
 ・Row Widget が使われていること
 
 ・Column Widget が使われていること
-  
+
 ・Stateful Widget、setState() が使われていること
 
 ・https://docs.flutter.dev/reference/widgets より本授業で取り扱っていないWidget(※)を自身で調べ、実際に使ってみること
