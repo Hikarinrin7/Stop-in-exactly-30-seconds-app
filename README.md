@@ -1,16 +1,16 @@
-# second30_app
+# 狙え！ぴったり30秒
 
-A new Flutter project.
+ちょうど30秒でストップウォッチを止めることを目指すゲームです。
+どれくらいぴったりかによって評価が変わります。
+秒数は10, 20, 30, 60秒から選択できます。
+誤差0.1秒以内になると…？！
 
-## Getting Started
+## 遊び方
 
-This project is a starting point for a Flutter application.
+スタートボタンを押します。
 
-A few resources to get you started if this is your first Flutter project:
+30秒経ったと思ったらストップボタンを押します。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+右下のresult→から結果を確認しましょう。
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+resetすると何度でも遊べます。
