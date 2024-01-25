@@ -17,3 +17,17 @@
 右下のresult→ボタンから結果を確認しましょう。
 
 resetすると何度でも遊べます。
+
+## 技術要件
+
+○ マルチスクリーンであること(=画面遷移があること)
+○ Row Widget が使われていること
+○ Column Widget が使われていること
+○ Stateful Widget、setState() が使われていること
+○ https://docs.flutter.dev/reference/widgets より本授業で取り扱っていないWidget(※)を自身で調べ、実際に使ってみること
+
+## 使ったWidget
+
+DropdownButton：https://api.flutter.dev/flutter/material/DropdownButton-class.html
+
+FlutterLogo：https://api.flutter.dev/flutter/material/FlutterLogo-class.html
