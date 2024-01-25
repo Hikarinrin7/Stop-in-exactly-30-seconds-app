@@ -15,7 +15,7 @@ class ResultScreen extends StatelessWidget {
     String resultText = '';
     if (difference.abs() <= 0.1) {
       resultText = '天才！！！';
-    } else if (difference.abs() <= 1.0) {
+    } else if (difference.abs() <= 0.8) {
       resultText = 'すごい！';
     } else if (difference.abs() <= 4.0) {
       resultText += 'まあまあだね！';
@@ -30,7 +30,7 @@ class ResultScreen extends StatelessWidget {
     Color circleColor = difference >= 0 ? Colors.red : Colors.blue;
     if (difference.abs() <= 0.1) {
       circleColor = Colors.pink;
-    } else if (difference.abs() < 1.0) {
+    } else if (difference.abs() < 0.8) {
       circleColor = Colors.orange;
     } else if (difference.abs() > 4.0) {
       circleColor = Colors.grey;

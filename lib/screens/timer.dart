@@ -53,7 +53,6 @@ class _TimerScreenState extends State<TimerScreen> {
   // タイマーが経過時間を定期的に更新する
   void _startStopwatch() {
     const duration = Duration(milliseconds: 10);
-
     void updateUI(Timer timer) {
       if (_stopwatch.isRunning) {
         setState(() {});
@@ -89,9 +88,8 @@ class _TimerScreenState extends State<TimerScreen> {
   // ストップウォッチをリセットする_resetStopwatch
   void _resetStopwatch() {
     setState(() {
-      _stopwatch
-        ..stop()
-        ..reset();
+      _stopwatch.stop();
+      _stopwatch.reset();
       _isRunning = false;
     });
   }

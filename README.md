@@ -18,6 +18,14 @@
 
 resetすると何度でも遊べます。
 
+## 工夫したところ
+
+・秒数表示がぶれない。
+
+・開始前とカウントアップ中は、結果への遷移ボタンが押せなくなる。
+
+・画面サイズが変わってもレイアウトが崩れない。
+
 ### 技術要件
 
 ・マルチスクリーンであること(=画面遷移があること)
@@ -32,6 +40,6 @@ resetすると何度でも遊べます。
 
 ### 使ったWidget
 
-DropdownButton：https://api.flutter.dev/flutter/material/DropdownButton-class.html
+・DropdownButton：https://api.flutter.dev/flutter/material/DropdownButton-class.html
 
-FlutterLogo：https://api.flutter.dev/flutter/material/FlutterLogo-class.html
+・FlutterLogo：https://api.flutter.dev/flutter/material/FlutterLogo-class.html
