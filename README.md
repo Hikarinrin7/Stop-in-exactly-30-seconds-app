@@ -18,7 +18,7 @@
 
 resetすると何度でも遊べます。
 
-## 技術要件
+### 技術要件
 
 ・マルチスクリーンであること(=画面遷移があること)
 
@@ -28,9 +28,9 @@ resetすると何度でも遊べます。
 
 ・Stateful Widget、setState() が使われていること
 
-・https://docs.flutter.dev/reference/widgets より本授業で取り扱っていないWidget(※)を自身で調べ、実際に使ってみること
+・https://docs.flutter.dev/reference/widgets より本授業で取り扱っていないWidgetを自身で調べ、実際に使ってみること
 
-## 使ったWidget
+### 使ったWidget
 
 DropdownButton：https://api.flutter.dev/flutter/material/DropdownButton-class.html
 
