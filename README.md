@@ -20,15 +20,15 @@ resetすると何度でも遊べます。
 
 ## 技術要件
 
-○ マルチスクリーンであること(=画面遷移があること)
+・マルチスクリーンであること(=画面遷移があること)
 
-○ Row Widget が使われていること
+・Row Widget が使われていること
 
-○ Column Widget が使われていること
+・Column Widget が使われていること
+  
+・Stateful Widget、setState() が使われていること
 
-○ Stateful Widget、setState() が使われていること
-
-○ https://docs.flutter.dev/reference/widgets より本授業で取り扱っていないWidget(※)を自身で調べ、実際に使ってみること
+・https://docs.flutter.dev/reference/widgets より本授業で取り扱っていないWidget(※)を自身で調べ、実際に使ってみること
 
 ## 使ったWidget
 
