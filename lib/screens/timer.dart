@@ -1,7 +1,7 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'result.dart';
-import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -22,65 +22,94 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
+  // Stopwatchオブジェクトの宣言・タイマーの実行状態を保持する変数_isRunningの定義
+  // late：変数が後で初期化されることを示す。
   late Stopwatch _stopwatch;
-  late Timer _timer;
   bool _isRunning = false;
 
-  // 目標時間の設定リスト
+  //目標時間の設定リストgoalTimes
+  //初期値30秒
   List<int> goalTimes = [10, 20, 30, 60];
-  int selectedGoalTimeIndex = 2; // 初期選択は30秒
+  int selectedGoalTimeIndex = 2;
 
+  // ドロップダウンメニューに使うリスト作成（
+  List<DropdownMenuItem<int>> buildDropdownMenuItems() {
+    return goalTimes.map((time) {
+      return DropdownMenuItem<int>(
+        child: Text('$time秒'),
+        value: goalTimes.indexOf(time),
+      );
+    }).toList();
+  }
+
+  // initState()：State オブジェクトがウィジェットツリーに追加されたときに呼び出される
+  // ストップウォッチの初期化
   @override
   void initState() {
     super.initState();
     _stopwatch = Stopwatch();
   }
 
+  // タイマーが経過時間を定期的に更新する
   void _startStopwatch() {
-    // タイマーが経過時間を定期的に更新する
-    _timer = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
+    const duration = Duration(milliseconds: 10);
+
+    void updateUI(Timer timer) {
       if (_stopwatch.isRunning) {
         setState(() {});
       }
+    }
+
+    Timer.periodic(duration, updateUI);
+  }
+
+  // ストップウォッチの経過時間を表示する文字列に変換
+  // ~/は整数除算を意味し、小数点以下を切り捨てるらしい
+  // 2567ミリ秒なら、567→56
+  String formatStopwatchTime() {
+    final int decimalSeconds = _stopwatch.elapsed.inMilliseconds % 1000 ~/ 10;
+    final int seconds = (_stopwatch.elapsedMilliseconds ~/ 1000) % 100;
+
+    return '${seconds.toString().padLeft(2, '0')}.${decimalSeconds.toString().padLeft(2, '0')}';
+  }
+
+  // ストップウォッチの開始/停止を切り替える_toggleStopwatch
+  void _toggleStopwatch() {
+    setState(() {
+      if (_stopwatch.isRunning) {
+        _stopwatch.stop();
+      } else {
+        _stopwatch.start();
+        _startStopwatch();
+      }
+      _isRunning = !_isRunning;
     });
   }
 
-  void _toggleStopwatch() {
-    // ストップウォッチの開始/停止を切り替える
-    if (_stopwatch.isRunning) {
-      _stopwatch.stop();
-      _timer.cancel();
-    } else {
-      _stopwatch.start();
-      _startStopwatch();
-    }
-    _isRunning = !_isRunning;
-  }
-
+  // ストップウォッチをリセットする_resetStopwatch
   void _resetStopwatch() {
-    // ストップウォッチをリセットする
-    if (_stopwatch.isRunning) {
-      _stopwatch.stop();
-      _timer.cancel();
-    }
-    _stopwatch.reset();
-    setState(() {});
-    _isRunning = false;
+    setState(() {
+      _stopwatch
+        ..stop()
+        ..reset();
+      _isRunning = false;
+    });
   }
 
+  // 結果画面に遷移する_navigateToResultScreen
+  // elapsedTime（経過時間）とgoalTime（目標時間）を渡す
   void _navigateToResultScreen() {
-    // 経過時間が0秒以上の場合に ResultScreen に遷移する
-    if (_stopwatch.elapsed.inSeconds > 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ResultScreen(
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return ResultScreen(
             elapsedTime: _stopwatch.elapsed.inMilliseconds.toDouble() / 1000,
             goalTime: goalTimes[selectedGoalTimeIndex].toDouble(),
-          ),
-        ),
-      );
-    }
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -93,6 +122,7 @@ class _TimerScreenState extends State<TimerScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          // 目標時間設定
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -100,14 +130,8 @@ class _TimerScreenState extends State<TimerScreen> {
               SizedBox(width: 10.0),
               DropdownButton<int>(
                 value: selectedGoalTimeIndex,
-                items: goalTimes
-                    .map((time) => DropdownMenuItem<int>(
-                          child: Text('$time秒'),
-                          value: goalTimes.indexOf(time),
-                        ))
-                    .toList(),
+                items: buildDropdownMenuItems(),
                 onChanged: (index) {
-                  // 選択された目標時間のインデックスを更新
                   setState(() {
                     selectedGoalTimeIndex = index!;
                   });
@@ -115,7 +139,7 @@ class _TimerScreenState extends State<TimerScreen> {
               ),
             ],
           ),
-          SizedBox(height: 10.0),
+          // 経過時間表示欄
           Container(
             width: 300.0,
             padding: EdgeInsets.all(10.0),
@@ -127,12 +151,12 @@ class _TimerScreenState extends State<TimerScreen> {
                 _stopwatch.elapsed.inSeconds >= 4 ? '？' : formatStopwatchTime(),
                 style: TextStyle(
                   fontSize: 48.0,
-                  fontFeatures: [FontFeature.tabularFigures()], // ぶれないように
+                  fontFeatures: [FontFeature.tabularFigures()], // 等幅フォント
                 ),
               ),
             ),
           ),
-          SizedBox(height: 20.0),
+          // スタート・ストップボタン
           Container(
             width: 200.0,
             height: 200.0,
@@ -144,7 +168,7 @@ class _TimerScreenState extends State<TimerScreen> {
               ),
             ),
           ),
-          SizedBox(height: 20.0),
+          // 案内テキスト
           Text(
             _isRunning
                 ? '測定中...'
@@ -153,10 +177,11 @@ class _TimerScreenState extends State<TimerScreen> {
                     : '結果を確認してみましょう！',
             style: TextStyle(fontSize: 18.0),
           ),
-          SizedBox(height: 20.0),
+          // リセットボタンと結果画面遷移ボタン
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // リセットボタン
               ElevatedButton(
                 onPressed: _resetStopwatch,
                 child: Text(
@@ -167,6 +192,7 @@ class _TimerScreenState extends State<TimerScreen> {
                   minimumSize: Size(150.0, 60.0),
                 ),
               ),
+              // 結果画面遷移ボタン
               ElevatedButton(
                 onPressed: _stopwatch.elapsed.inSeconds == 0
                     ? null
@@ -184,21 +210,11 @@ class _TimerScreenState extends State<TimerScreen> {
             ],
           ),
           FlutterLogo(
-            size: 100,
+            size: 70,
             style: FlutterLogoStyle.horizontal,
           )
         ],
       ),
     );
-  }
-
-  String formatStopwatchTime() {
-    // ストップウォッチの経過時間をフォーマットして返す
-    final int decimalSeconds =
-        ((_stopwatch.elapsedMilliseconds / 10) % 100).truncate();
-    final int seconds = (_stopwatch.elapsedMilliseconds ~/ 1000) % 60;
-    final int minutes = (_stopwatch.elapsedMilliseconds ~/ 60000) % 60;
-
-    return '$minutes:${seconds.toString().padLeft(2, '0')}.${decimalSeconds.toString().padLeft(2, '0')}';
   }
 }
