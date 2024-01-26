@@ -43,3 +43,7 @@ resetすると何度でも遊べます。
 ・DropdownButton：https://api.flutter.dev/flutter/material/DropdownButton-class.html
 
 ・FlutterLogo：https://api.flutter.dev/flutter/material/FlutterLogo-class.html
+
+### その他
+
+プログラミング初心者なので、何のコードなのかのメモ書きが多く残っています。
