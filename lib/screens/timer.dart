@@ -1,23 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:second30_app/ads/ad_banner.dart';
 import 'result.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: TimerScreen(),
-    );
-  }
-}
 
 class TimerScreen extends StatefulWidget {
   @override
@@ -113,11 +99,59 @@ class _TimerScreenState extends State<TimerScreen> {
     );
   }
 
+  void _showPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('遊び方'),
+          content: Container(
+            width: 200,
+            height: 180,
+            child: ListView(
+              children: [
+                Text('① 目標時間を設定します。'),
+                Text('② Startボタンを押します。'),
+                Text('③ ちょうど30秒だと思ったらStopボタンを押します。'),
+                Text('④ Resultボタンを押すと、結果が見られます。'),
+                Text('★ 誤差が0.1秒以内になると...?!'),
+              ],
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('閉じる'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ぴったりで止めろ！'),
+        backgroundColor: Colors.blue.shade100,
+        title: Text(
+          'ぴったりで止めろ！',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          // 電球アイコン
+          IconButton(
+            icon: Icon(Icons.lightbulb_outline),
+            onPressed: () {
+              _showPopup(context);
+            },
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -219,6 +253,7 @@ class _TimerScreenState extends State<TimerScreen> {
               AsyncSnapshot<AnchoredAdaptiveBannerAdSize?> snapshot,
             ) {
               if (snapshot.hasData) {
+                //広告サイズが取得できた場合
                 final data = snapshot.data;
                 if (data != null) {
                   return Container(
@@ -227,9 +262,11 @@ class _TimerScreenState extends State<TimerScreen> {
                     child: AdBanner(size: data),
                   );
                 } else {
+                  // 広告サイズが取得できなかった場合
                   return Container(
                     height: 70,
                     color: Colors.white70,
+                    child: Text("あれ、広告が取得できなかったよ…"),
                   );
                 }
               } else {

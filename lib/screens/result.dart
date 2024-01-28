@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:second30_app/ads/ad_banner.dart';
 
 class ResultScreen extends StatelessWidget {
   final double elapsedTime;
   final double goalTime;
 
-  // elapsedTime（経過時間）とgoalTime（目標時間）を受け取る
   ResultScreen({required this.elapsedTime, required this.goalTime});
 
   @override
   Widget build(BuildContext context) {
-    // 目標時間との差differenceを定義
     double difference = elapsedTime - goalTime;
-    // 評価コメントresultTextを定義。abs()は絶対値
     String resultText = '';
     if (difference.abs() <= 0.1) {
       resultText = '天才！！！';
@@ -22,11 +21,11 @@ class ResultScreen extends StatelessWidget {
     } else {
       resultText += 'もっと頑張ろう';
     }
-    // 目標との差は、+-をつけて表示するdifferenceTextに
+
     String differenceText = difference >= 0
         ? '+${difference.toStringAsFixed(2)}'
         : '${difference.toStringAsFixed(2)}';
-    // 目標との差の表示欄である円の色circleColorを場合分け
+
     Color circleColor = difference >= 0 ? Colors.red : Colors.blue;
     if (difference.abs() <= 0.1) {
       circleColor = Colors.pink;
@@ -38,43 +37,82 @@ class ResultScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('挑戦結果'),
+        backgroundColor: Colors.blue.shade100,
+        title: Text(
+          '挑戦結果',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      body: Center(
+      body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              '目標時間: ${goalTime.toStringAsFixed(2)}秒',
-              // 小数点以下二桁に丸めるtoStringAsFixed
-              style: TextStyle(fontSize: 24.0),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '目標時間: ${goalTime.toStringAsFixed(2)}秒',
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                  SizedBox(height: 20.0),
+                  Text(
+                    'あなたの記録: ${elapsedTime.toStringAsFixed(2)}秒',
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                  SizedBox(height: 20.0),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: circleColor,
+                    ),
+                    padding: EdgeInsets.all(80.0),
+                    child: Text(
+                      '$differenceText秒',
+                      style: TextStyle(
+                        fontSize: 48.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  Text(
+                    resultText,
+                    style:
+                    TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 20.0),
-            Text(
-              'あなたの記録: ${elapsedTime.toStringAsFixed(2)}秒',
-              // 小数点以下二桁に丸めるtoStringAsFixed
-              style: TextStyle(fontSize: 24.0),
-            ),
-            SizedBox(height: 20.0),
             Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: circleColor,
-              ),
-              padding: EdgeInsets.all(80.0),
-              child: Text(
-                '$differenceText秒',
-                style: TextStyle(
-                  fontSize: 48.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              alignment: Alignment.bottomCenter,
+              height: 70,
+              color: Colors.white70,
+              child: FutureBuilder(
+                future: AdSize.getAnchoredAdaptiveBannerAdSize(
+                  Orientation.portrait,
+                  MediaQuery.of(context).size.width.truncate(),
                 ),
+                builder: (
+                    BuildContext context,
+                    AsyncSnapshot<AnchoredAdaptiveBannerAdSize?> snapshot,
+                    ) {
+                  if (snapshot.hasData) {
+                    final data = snapshot.data;
+                    if (data != null) {
+                      return AdBanner(size: data);
+                    } else {
+                      return Text("あれ、広告が取得できなかったよ…");
+                    }
+                  } else {
+                    return Container();
+                  }
+                },
               ),
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              resultText,
-              style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
             ),
           ],
         ),

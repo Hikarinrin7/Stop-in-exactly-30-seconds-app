@@ -2,7 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
-        <!--本来のidはca-app-pub-6131383135644612~5506481073-->
+        <!--本来のidは（iOS）
+        ca-app-pub-6131383135644612~5506481073と
+        ca-app-pub-6131383135644612/9585326880
+        -->
         <!--テスト広告を追加。テストidは
         アプリID（テスト用）
         Android: ca-app-pub-3940256099942544~3347511713
@@ -215,7 +218,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>Second30 App</string>
+		<string>Perfect Timing Challenge</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
