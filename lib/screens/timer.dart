@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:second30_app/ads/ad_banner.dart';
 import 'result.dart';
 
 void main() {
@@ -71,8 +72,7 @@ class _TimerScreenState extends State<TimerScreen> {
     final int decimalSeconds = _stopwatch.elapsed.inMilliseconds % 1000 ~/ 10;
     final int seconds = (_stopwatch.elapsedMilliseconds ~/ 1000) % 100;
 
-    return '${seconds.toString().padLeft(2, '0')}.${decimalSeconds.toString()
-        .padLeft(2, '0')}';
+    return '${seconds.toString().padLeft(2, '0')}.${decimalSeconds.toString().padLeft(2, '0')}';
   }
 
   // ストップウォッチの開始/停止を切り替える_toggleStopwatch
@@ -113,112 +113,135 @@ class _TimerScreenState extends State<TimerScreen> {
     );
   }
 
-  //広告の配信のために追加
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('ぴったりで止めろ！'),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+      appBar: AppBar(
+        title: Text('ぴったりで止めろ！'),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
           // 目標時間設定
           Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('目標時間：'),
-            SizedBox(width: 10.0),
-            DropdownButton<int>(
-              value: selectedGoalTimeIndex,
-              items: buildDropdownMenuItems(),
-              onChanged: (index) {
-                setState(() {
-                  selectedGoalTimeIndex = index!;
-                });
-              },
-            ),
-          ],
-        ),
-        // 経過時間表示欄
-        Container(
-          width: 300.0,
-          padding: EdgeInsets.all(10.0),
-          decoration: BoxDecoration(
-            border: Border.all(width: 2.0, color: Colors.black),
-          ),
-          child: Center(
-            child: Text(
-              _stopwatch.elapsed.inSeconds >= 4 ? '？' : formatStopwatchTime(),
-              style: TextStyle(
-                fontSize: 48.0,
-                fontFeatures: [FontFeature.tabularFigures()], // 等幅フォント
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('目標時間：'),
+              SizedBox(width: 10.0),
+              DropdownButton<int>(
+                value: selectedGoalTimeIndex,
+                items: buildDropdownMenuItems(),
+                onChanged: (index) {
+                  setState(() {
+                    selectedGoalTimeIndex = index!;
+                  });
+                },
               ),
-            ),
+            ],
           ),
-        ),
-        // スタート・ストップボタン
-        Container(
-          width: 200.0,
-          height: 200.0,
-          child: ElevatedButton(
-            onPressed: _toggleStopwatch,
-            child: Text(
-              _isRunning ? 'Stop' : 'Start',
-              style: TextStyle(fontSize: 40.0),
+          // 経過時間表示欄
+          Container(
+            width: 300.0,
+            padding: EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              border: Border.all(width: 2.0, color: Colors.black),
             ),
-          ),
-        ),
-        // 案内テキスト
-        Text(
-          _isRunning
-              ? '測定中...'
-              : _stopwatch.elapsed.inSeconds == 0
-              ? 'Startを押して開始'
-              : '結果を確認してみましょう！',
-          style: TextStyle(fontSize: 18.0),
-        ),
-        // リセットボタンと結果画面遷移ボタン
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // リセットボタン
-            ElevatedButton(
-              onPressed: _resetStopwatch,
+            child: Center(
               child: Text(
-                'Reset',
-                style: TextStyle(fontSize: 18.0),
-              ),
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(150.0, 60.0),
+                _stopwatch.elapsed.inSeconds >= 4 ? '？' : formatStopwatchTime(),
+                style: TextStyle(
+                  fontSize: 48.0,
+                  fontFeatures: [FontFeature.tabularFigures()], // 等幅フォント
+                ),
               ),
             ),
-            // 結果画面遷移ボタン
-            ElevatedButton(
-              onPressed: _stopwatch.elapsed.inSeconds == 0
-                  ? null
-                  : _isRunning
-                  ? null
-                  : _navigateToResultScreen,
+          ),
+          // スタート・ストップボタン
+          Container(
+            width: 200.0,
+            height: 200.0,
+            child: ElevatedButton(
+              onPressed: _toggleStopwatch,
               child: Text(
-                'Result→',
-                style: TextStyle(fontSize: 18.0),
-              ),
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(150.0, 60.0),
+                _isRunning ? 'Stop' : 'Start',
+                style: TextStyle(fontSize: 40.0),
               ),
             ),
-          ],
-        ),
-        //広告！！！！
-
-
-    ],
-    ),
+          ),
+          // 案内テキスト
+          Text(
+            _isRunning
+                ? '測定中...'
+                : _stopwatch.elapsed.inSeconds == 0
+                    ? 'Startを押して開始'
+                    : '結果を確認してみましょう！',
+            style: TextStyle(fontSize: 18.0),
+          ),
+          // リセットボタンと結果画面遷移ボタン
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // リセットボタン
+              ElevatedButton(
+                onPressed: _resetStopwatch,
+                child: Text(
+                  'Reset',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(150.0, 60.0),
+                ),
+              ),
+              // 結果画面遷移ボタン
+              ElevatedButton(
+                onPressed: _stopwatch.elapsed.inSeconds == 0
+                    ? null
+                    : _isRunning
+                        ? null
+                        : _navigateToResultScreen,
+                child: Text(
+                  'Result→',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(150.0, 60.0),
+                ),
+              ),
+            ],
+          ),
+          //広告！！！！
+          FutureBuilder(
+            future: AdSize.getAnchoredAdaptiveBannerAdSize(Orientation.portrait,
+                MediaQuery.of(context).size.width.truncate()),
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<AnchoredAdaptiveBannerAdSize?> snapshot,
+            ) {
+              if (snapshot.hasData) {
+                final data = snapshot.data;
+                if (data != null) {
+                  return Container(
+                    height: 70,
+                    color: Colors.white70,
+                    child: AdBanner(size: data),
+                  );
+                } else {
+                  return Container(
+                    height: 70,
+                    color: Colors.white70,
+                  );
+                }
+              } else {
+                return Container(
+                  height: 70,
+                  color: Colors.white70,
+                );
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }

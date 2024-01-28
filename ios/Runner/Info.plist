@@ -2,9 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
-        <!--テスト広告を追加。本来のidはca-app-pub-6131383135644612~5506481073-->
-        <!--テスト広告を追加。テストidはca-app-pub-3940256099942544/2934735716-->
-        <!--ca-app-pub-3940256099942544/2934735716もテスト用？-->
+        <!--本来のidはca-app-pub-6131383135644612~5506481073-->
+        <!--テスト広告を追加。テストidは
+        アプリID（テスト用）
+        Android: ca-app-pub-3940256099942544~3347511713
+        iOS: ca-app-pub-3940256099942544~1458002511
+        広告ユニットID（テスト用）
+        Android: ca-app-pub-3940256099942544/6300978111
+        iOS: ca-app-pub-3940256099942544/2934735716
+        -->
         <key>GADApplicationIdentifier</key>
         <string>ca-app-pub-3940256099942544~1458002511</string>
         <key>SKAdNetworkItems</key>
