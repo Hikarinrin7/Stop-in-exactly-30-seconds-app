@@ -114,7 +114,7 @@ class _TimerScreenState extends State<TimerScreen> {
                 Text('② Startボタンを押します。'),
                 Text('③ ちょうど30秒だと思ったらStopボタンを押します。'),
                 Text('④ Resultボタンを押すと、結果が見られます。'),
-                Text('★ 誤差が0.1秒以内になると...?!'),
+                Text('★ 誤差が0.05秒以内になると...?!'),
               ],
             ),
           ),
