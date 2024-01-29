@@ -13,7 +13,7 @@ class ResultScreen extends StatelessWidget {
     double difference = elapsedTime - goalTime;
     String resultText = '';
     if (difference.abs() < 0.005) {
-      resultText = 'あなたは神です。AppStoreのデベロッパWebサイトから、ぜひ画面のスクショを開発者に送ってください。';
+      resultText = 'あなたは神です。AppStoreから、ぜひ画面のスクショを開発者に送ってください。';
     } else if (difference.abs() <= 0.05) {
       resultText = '天才！！！';
     } else if (difference.abs() <= 0.8) {
