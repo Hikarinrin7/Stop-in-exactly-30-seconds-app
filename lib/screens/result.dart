@@ -12,11 +12,11 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double difference = elapsedTime - goalTime;
     String resultText = '';
-    if (difference.abs() <= 0.1) {
+    if (difference.abs() <= 0.05) {
       resultText = '天才！！！';
     } else if (difference.abs() <= 0.8) {
       resultText = 'すごい！';
-    } else if (difference.abs() <= 4.0) {
+    } else if (difference.abs() <= 3.0) {
       resultText += 'まあまあだね！';
     } else {
       resultText += 'もっと頑張ろう';
@@ -27,11 +27,11 @@ class ResultScreen extends StatelessWidget {
         : '${difference.toStringAsFixed(2)}';
 
     Color circleColor = difference >= 0 ? Colors.red : Colors.blue;
-    if (difference.abs() <= 0.1) {
+    if (difference.abs() <= 0.05) {
       circleColor = Colors.pink;
     } else if (difference.abs() < 0.8) {
       circleColor = Colors.orange;
-    } else if (difference.abs() > 4.0) {
+    } else if (difference.abs() > 3.0) {
       circleColor = Colors.grey;
     }
 
@@ -88,6 +88,7 @@ class ResultScreen extends StatelessWidget {
                 ],
               ),
             ),
+            //広告
             Container(
               alignment: Alignment.bottomCenter,
               height: 70,
