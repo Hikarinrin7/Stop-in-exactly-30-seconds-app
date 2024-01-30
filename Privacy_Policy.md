@@ -16,3 +16,9 @@ Admobプライバシーポリシー：https://policies.google.com/technologies/a
 第三者の広告の配信・表示のため
 
 当社のサービスに関連して、個人を識別できない形式に加工した統計データを作成するため
+
+
+## ダウンロードしてくれた方へ
+ダウンロードありがとうございます。
+
+お問い合わせ、開発者へのメッセージはこちらから！https://docs.google.com/forms/d/e/1FAIpQLSeq9E2MgvCuJy9iFn-xl2K44aUnMCgvX18px0IXkuHNQEZ4qg/viewform
