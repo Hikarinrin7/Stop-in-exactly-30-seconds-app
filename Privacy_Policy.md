@@ -19,6 +19,12 @@ Admobプライバシーポリシー：https://policies.google.com/technologies/a
 
 
 ## ダウンロードしてくれた方へ
-ダウンロードありがとうございます。
+ダウンロードありがとうございます。とっても嬉しいです。
 
-お問い合わせ、開発者へのメッセージはこちらから！https://docs.google.com/forms/d/e/1FAIpQLSeq9E2MgvCuJy9iFn-xl2K44aUnMCgvX18px0IXkuHNQEZ4qg/viewform
+ダウンロードはこちらから
+
+https://apps.apple.com/jp/app/perfecttimingchallenge/id6476839944
+
+お問い合わせ、開発者へのメッセージはこちらから！
+
+https://docs.google.com/forms/d/e/1FAIpQLSeq9E2MgvCuJy9iFn-xl2K44aUnMCgvX18px0IXkuHNQEZ4qg/viewform
