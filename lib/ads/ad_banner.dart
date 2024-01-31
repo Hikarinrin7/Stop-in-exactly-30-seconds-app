@@ -56,7 +56,7 @@ class _AdBannerState extends State<AdBanner> {
     }
 
     if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/6300978111'; // ここに発行したAndroid用の広告IDを設定
+      return 'ca-app-pub-6131383135644612/6220086502'; // ここに発行したAndroid用の広告IDを設定
     } else if (Platform.isIOS) {
       return 'ca-app-pub-6131383135644612/9585326880'; // ここに発行したiOS用の広告IDを設定
     } else {
