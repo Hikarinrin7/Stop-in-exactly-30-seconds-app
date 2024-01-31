@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:second30_app/ads/ad_banner.dart';
+import 'package:perfectTimingChallenge/ads/ad_banner.dart';
 
 class ResultScreen extends StatelessWidget {
   final double elapsedTime;

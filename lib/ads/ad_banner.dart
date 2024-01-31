@@ -25,6 +25,8 @@ class _AdBannerState extends State<AdBanner> {
   @override
   void initState() {
     super.initState();
+    // AdMobの初期化
+    MobileAds.instance.initialize();
     banner = _createBanner(widget.size);
   }
   //disposeは、ウィジェットを廃棄時に解放
@@ -56,7 +58,7 @@ class _AdBannerState extends State<AdBanner> {
     }
 
     if (Platform.isAndroid) {
-      return 'ca-app-pub-6131383135644612/6220086502'; // ここに発行したAndroid用の広告IDを設定
+      return 'ca-app-pub-6131383135644612/9013501304'; // ここに発行したAndroid用の広告IDを設定
     } else if (Platform.isIOS) {
       return 'ca-app-pub-6131383135644612/9585326880'; // ここに発行したiOS用の広告IDを設定
     } else {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:second30_app/screens/timer.dart';
+import 'package:perfectTimingChallenge/screens/timer.dart';
 
 void main() {
   //広告の配信のために追加
