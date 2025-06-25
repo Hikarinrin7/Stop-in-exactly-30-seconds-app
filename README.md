@@ -20,6 +20,11 @@
 
 resetすると何度でも遊べます。
 
+![3](https://github.com/user-attachments/assets/75ae5ad4-f0a0-473e-9975-c95220e693a1)
+![2](https://github.com/user-attachments/assets/cc69c8ec-09ed-4e9f-a8f7-f0f251591edd)
+![1](https://github.com/user-attachments/assets/b12e8657-29a6-4182-b10f-b4ab62d03028)
+
+
 ## 工夫したところ
 
 ・秒数表示がぶれない。
